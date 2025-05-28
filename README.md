@@ -1,2 +1,2 @@
-# forest_change
-Forest change detection
+# Forest change detection
+Forest change detection script.
