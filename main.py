@@ -2,12 +2,13 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 from PIL import Image
 from sklearn.ensemble import RandomForestClassifier
 
 CUR_MONTH_PATH = 'august'
 PREV_MONTH_PATH = 'july'
-MODEL_PATH = 'model_random_forest_full.pkl'
+MODEL_PATH = 'models\\model_random_forest_full.pkl'
 MASKS_PATH = 'masks'
 FEATURES = ['red', 'green', 'blue', 'delta_red', 'delta_green', 'delta_blue',
             'prev_ndvi', 'delta_ndvi', 'mean_delta_ndvi', 'prev_evi', 'delta_evi', 'mean_delta_evi']
@@ -83,7 +84,7 @@ def main():
     with open(MODEL_PATH, 'rb') as fp:
         model = pickle.load(fp)
 
-    for tile in tiles:
+    for tile in tqdm(tiles, desc='Process tiles'):
         rgb_cur = np.array(Image.open(os.path.join(CUR_MONTH_PATH, tile, 'RGB.tif'))).astype(np.int32)
         ndvi_cur = np.array(Image.open(os.path.join(CUR_MONTH_PATH, tile, 'NDVI.tif'))).astype(np.int32)
         rgb_prev = np.array(Image.open(os.path.join(PREV_MONTH_PATH, tile, 'RGB.tif'))).astype(np.int32)
