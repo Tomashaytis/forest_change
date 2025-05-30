@@ -5,6 +5,7 @@ from PIL import Image
 from tqdm import tqdm
 
 PATH_TO_TILES = 'D:\\Projects\\Others\\DataScience\\Forest Change\\Tiles_2024'
+OUTPUT_PATH = 'data'
 
 
 if __name__ == '__main__':
@@ -204,4 +205,4 @@ if __name__ == '__main__':
                                            'red', 'green', 'blue', 'prev_red', 'prev_green', 'prev_blue',
                                            'prev_ndvi', 'delta_ndvi', 'mean_delta_ndvi',
                                            'prev_evi', 'delta_evi', 'mean_delta_evi'])
-    pixels.to_csv('data/true_pixels.csv')
+    pixels.to_csv(os.path.join(OUTPUT_PATH, 'true_pixels.csv'))
